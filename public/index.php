@@ -10,7 +10,16 @@
 define('ROOT', dirname(__DIR__));
 define('PUBLIC', ROOT . '/public');
 
-require_once ROOT . '/core/Application.php';
+spl_autoload_register(function ($class) {
+    $file = ROOT . '/' . str_replace('\\', '/', $class) . '.php';
+    if (is_file($file)) {
+        require_once $file;
+    }
+});
 
-echo 'Hello World!';
-//dispatch()
+function sc()
+{
+    return \core\Application::getInstance();
+}
+
+sc()->dispatch();
