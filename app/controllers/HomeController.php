@@ -13,5 +13,12 @@ use core\Controller;
 
 class HomeController extends Controller
 {
-
+    public function indexAction()
+    {
+        $title = 'Home Page';
+        $this->view->setTitle($title);
+        $this->view->setMeta('Keywords', $title);
+        $this->view->setMeta('Description', $title);
+        $this->view->assign('name', 'testim');
+    }
 }

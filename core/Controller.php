@@ -9,8 +9,19 @@
 
 namespace core;
 
-
-class Controller
+abstract class Controller
 {
+    protected $layout_template = '';
+    protected $view_template = '';
+    protected $view;
 
+    public function before()
+    {
+        $this->view = new View($this->layout_template, $this->view_template);
+    }
+
+    public function after()
+    {
+        $this->view->display();
+    }
 }

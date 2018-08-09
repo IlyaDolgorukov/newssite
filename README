@@ -1,1 +1,1 @@
-You must rename the file _db.php in db.php, and specify the details of access to your database
+You must rename the file config/_db.php to config/db.php, and specify the details of access to your database

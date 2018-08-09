@@ -13,5 +13,8 @@ use core\Controller;
 
 class AjaxController extends Controller
 {
-
+    public function indexAction()
+    {
+        echo __METHOD__;
+    }
 }

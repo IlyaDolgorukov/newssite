@@ -8,6 +8,7 @@
  */
 
 define('ROOT', dirname(__DIR__));
+define('APP', ROOT . '/app');
 define('PUBLIC', ROOT . '/public');
 
 spl_autoload_register(function ($class) {
