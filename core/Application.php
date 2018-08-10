@@ -24,6 +24,10 @@ final class Application
      */
     private $routes = array();
     /**
+     * @var array|mixed
+     */
+    private $db_settings = array();
+    /**
      * @var
      */
     private $db_handler;
@@ -34,6 +38,7 @@ final class Application
     private function __construct()
     {
         $this->routes = require ROOT . '/config/routing.php';
+        $this->db_settings = require ROOT . '/config/db.php';
     }
 
     /**
@@ -180,6 +185,35 @@ final class Application
                 $this->showError("Класс контроллера <b>$controller</b> не найден", 404);
             }
         }
+    }
+
+    /**
+     * @return resource
+     */
+    private function db_connect()
+    {
+        $handler = @mysql_connect($this->db_settings['host'], $this->db_settings['user'], $this->db_settings['password'], true);
+        if (!$handler) {
+            $error = 'Ошибка при подключении к Базе Данных - ' . mysql_error() . ' (#' . mysql_errno() . ')';
+            $this->showError($error);
+        }
+        if (!mysql_select_db($this->db_settings['database'], $handler)) {
+            $error = 'Ошибка при подключении к Базе Данных - ' . mysql_error() . ' (#' . mysql_errno() . ')';
+            $this->showError($error);
+        }
+        @mysql_set_charset('utf8', $handler);
+        return $handler;
+    }
+
+    /**
+     * @return resource
+     */
+    public function getDbHandler()
+    {
+        if (empty($this->db_handler)) {
+            $this->db_handler = $this->db_connect();
+        }
+        return $this->db_handler;
     }
 
     /**
