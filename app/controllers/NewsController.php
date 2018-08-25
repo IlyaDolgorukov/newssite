@@ -9,6 +9,7 @@
 
 namespace app\controllers;
 
+use app\models\CommentsModel;
 use app\models\NewsModel;
 use core\Controller;
 use core\Request;
@@ -40,12 +41,13 @@ class NewsController extends Controller
         if (empty($news)) {
             sc()->showError("Новость #{$news_id} не найдена");
         } else {
+            $comments_model = new CommentsModel();
             $title = $news['title'];
             $this->view->setTitle($title);
             $this->view->setMeta('Keywords', $title);
             $this->view->setMeta('Description', $title);
-            $this->view->assign('news_id', $news_id);
             $this->view->assign('news', $news);
+            $this->view->assign('comments', $comments_model->getNewsComments($news['id']));
         }
     }
 
