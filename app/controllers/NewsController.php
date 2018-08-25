@@ -58,9 +58,11 @@ class NewsController extends Controller
         if (Request::getMethod() == 'post') {
             $data = Request::post('form_data', array(), 'array');
             if (!empty($data)) {
-                list($values, $errors) = $this->validateForm($data);
-                if (empty($errors)) {
+                $result = $this->validateForm($data);
+                if (empty($result['errors'])) {
                     //save form & redirect to home page
+                } else {
+                    extract($result);
                 }
             } else {
                 $errors = $this->fields;
