@@ -83,6 +83,16 @@ class Request
     }
 
     /**
+     * @param $value
+     * @return string
+     */
+    public static function clearFormField($value)
+    {
+        $val = self::cast($value, '', 'string_trim');
+        return (!empty($val)) ? htmlspecialchars($val) : '';
+    }
+
+    /**
      * @param null $name
      * @param null $default
      * @param null $type

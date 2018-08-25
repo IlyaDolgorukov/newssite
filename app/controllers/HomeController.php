@@ -22,7 +22,7 @@ class HomeController extends Controller
         $model = new NewsModel();
         $page = Request::get('page', 1, 'int');
         $offset = ($page - 1) * $this->limit;
-        $title = 'Home Page';
+        $title = 'Главная страница';
         $this->view->setTitle($title);
         $this->view->setMeta('Keywords', $title);
         $this->view->setMeta('Description', $title);
