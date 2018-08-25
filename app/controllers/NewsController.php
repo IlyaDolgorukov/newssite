@@ -61,6 +61,14 @@ class NewsController extends Controller
                 $result = $this->validateForm($data);
                 if (empty($result['errors'])) {
                     //save form & redirect to home page
+                    $model = new NewsModel();
+                    $id = $model->addNews($result['values']);
+                    if($id > 0){
+                        header('Location: /');
+                        exit;
+                    }else{
+                        sc()->showError("Не удалось добавить новость");
+                    }
                 } else {
                     extract($result);
                 }
