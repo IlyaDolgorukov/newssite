@@ -21,11 +21,6 @@ use core\Request;
 class NewsController extends Controller
 {
     /**
-     * @var array
-     */
-    private $fields = array('author', 'title', 'short_text', 'full_text');
-
-    /**
      *
      */
     public function indexAction()
@@ -57,10 +52,11 @@ class NewsController extends Controller
     public function addAction()
     {
         $errors = $values = array();
+        $fields = array('author', 'title', 'short_text', 'full_text');
         if (Request::getMethod() == 'post') {
             $data = Request::post('form_data', array(), 'array');
             if (!empty($data)) {
-                $result = $this->validateForm($data);
+                $result = Request::validateForm($data, $fields);
                 if (empty($result['errors'])) {
                     //save form & redirect to home page
                     $model = new NewsModel();
@@ -75,7 +71,7 @@ class NewsController extends Controller
                     extract($result);
                 }
             } else {
-                $errors = $this->fields;
+                $errors = $fields;
             }
         }
         $title = 'Добавление новости';
@@ -84,23 +80,5 @@ class NewsController extends Controller
         $this->view->setMeta('Description', $title);
         $this->view->assign('values', $values);
         $this->view->assign('errors', $errors);
-    }
-
-    /**
-     * @param $data
-     * @return array
-     */
-    public function validateForm($data)
-    {
-        $errors = $values = array();
-        foreach ($this->fields as $field) {
-            $val = (isset($data[$field])) ? Request::clearFormField($data[$field]) : '';
-            if (!empty($val)) {
-                $values[$field] = $val;
-            } else {
-                $errors[] = $field;
-            }
-        }
-        return compact('values', 'errors');
     }
 }

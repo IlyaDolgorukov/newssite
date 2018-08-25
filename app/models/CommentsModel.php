@@ -16,11 +16,28 @@ class CommentsModel extends Model
     protected $table = 'comments';
     protected $comments;
 
+    public function addComment($data)
+    {
+        $columns = array('news_id', 'parent', 'depth', 'author', 'text');
+        $insert_data = array();
+        foreach ($columns as $col) {
+            $val = (isset($data[$col])) ? $data[$col] : '';
+            $insert_data[] = '\'' . $this->escape($val) . '\'';
+        }
+        $insert_data = implode(', ', $insert_data);
+        $msql_date = date("Y-m-d H:i:s");
+        $sql = "
+            INSERT INTO {$this->getTable()} VALUES (NULL, '{$msql_date}', {$insert_data})
+        ";
+        return $this->query($sql)->insertId();
+    }
+
     public function getNewsComments($news_id)
     {
         $sql = "
             SELECT * FROM {$this->getTable()}
             WHERE news_id = {$news_id}
+            ORDER BY date DESC
         ";
         $result = $this->query($sql)->fetchAll();
         if(!empty($result)){

@@ -22,3 +22,7 @@
 p.lead {
     margin: 4rem 0;
 }
+
+.block-comment-child {
+    margin-left: 30px;
+}

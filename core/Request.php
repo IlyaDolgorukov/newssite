@@ -92,6 +92,20 @@ class Request
         return (!empty($val)) ? htmlspecialchars($val) : '';
     }
 
+    public static function validateForm($data, $fields)
+    {
+        $errors = $values = array();
+        foreach ($fields as $field) {
+            $val = (isset($data[$field])) ? self::clearFormField($data[$field]) : '';
+            if (!empty($val)) {
+                $values[$field] = $val;
+            } else {
+                $errors[] = $field;
+            }
+        }
+        return compact('values', 'errors');
+    }
+
     /**
      * @param null $name
      * @param null $default

@@ -25,12 +25,12 @@ class View
         $controller = Request::param('controller', '', 'string');
         $this->view_path = APP . '/views/' . strtolower($controller) . '/';
         $this->layout_path = APP . '/views/layout/';
-        if (empty($layout)) {
+        if (empty($layout) && $layout !== null) {
             $this->setLayout('default');
         } else {
             $this->setLayout($layout);
         }
-        if (empty($view)) {
+        if (empty($view) && $view !== null) {
             $action = Request::param('action', null, 'string');
             $this->setView($action);
         } else {
