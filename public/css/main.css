@@ -1,1 +1,24 @@
+.news-card {
+    margin-top:30px;
+}
 
+.card-link {
+    outline: none;
+}
+
+.card-text {
+    margin-top: 1rem;
+}
+
+.jumbotron {
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+
+p.lead {
+    margin: 4rem 0;
+}
+
+.error {
+    border: 1px solid #ff4855;
+}

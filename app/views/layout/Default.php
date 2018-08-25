@@ -27,6 +27,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <h1 class="text-center">Тестовое задание для разработчика</h1>
+                    <h3 class="text-center">Заказчик: Компания СекретКом</h3>
+                    <h3 class="text-center">Исполнитель: Долгоруков Илья</h3>
                     <?= $content ?>
                 </div>
             </div>
