@@ -56,6 +56,7 @@
                     <input type="hidden" name="parent" value="0" />
                     <input type="hidden" name="depth" value="0" />
                 </form>
+                <div id="form-text-error" class="text-danger"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="add-comment-btn">Сохранить</button>

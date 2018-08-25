@@ -90,7 +90,7 @@ class AjaxController extends Controller
                 $this->errors = $result['errors'];
             }
         } else {
-            $this->errors = array('Входные параметры не корректны');
+            $this->errors = array('Входные параметры не корректны', 'И тут еще чего-то');
         }
     }
 }
