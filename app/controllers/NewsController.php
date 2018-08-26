@@ -43,6 +43,7 @@ class NewsController extends Controller
             $this->view->setMeta('Description', $title);
             $this->view->assign('news', $news);
             $this->view->assign('comments', $comments_model->getNewsComments($news['id']));
+            $this->view->assign('author', sc()->getSessionVar('author'));
         }
     }
 
@@ -62,6 +63,7 @@ class NewsController extends Controller
                     $model = new NewsModel();
                     $id = $model->addNews($result['values']);
                     if($id > 0){
+                        sc()->setSessionVar('author', $result['values']['author']);
                         header('Location: /');
                         exit;
                     }else{
@@ -80,5 +82,6 @@ class NewsController extends Controller
         $this->view->setMeta('Description', $title);
         $this->view->assign('values', $values);
         $this->view->assign('errors', $errors);
+        $this->view->assign('author', sc()->getSessionVar('author'));
     }
 }

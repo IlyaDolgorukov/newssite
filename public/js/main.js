@@ -1,4 +1,6 @@
 $(function () {
+    var commentAuthor = '';
+
     function resetCommentForm(form) {
         form.trigger('reset');
         form.find('.is-invalid').removeClass('is-invalid');
@@ -50,6 +52,9 @@ $(function () {
         var btn = $(e.relatedTarget);
         form.find('input[name="parent"]').val(btn.data('parent'));
         form.find('input[name="depth"]').val(btn.data('depth'));
+        if (commentAuthor.length) {
+            form.find('input[name="author"]').val(commentAuthor);
+        }
     });
     $('#add-comment').on('hide.bs.modal', function (e) {
         var form = $(this).find('form');
@@ -62,6 +67,7 @@ $(function () {
         $.post('/ajax', commentForm.serialize(), function (r) {
             if (r.status == 'ok') {
                 insertCommentBlock(r.data);
+                commentAuthor = r.data.author;
                 modalCloseBtn.click();
             } else {
                 showCommentErrors(commentForm, r.errors);

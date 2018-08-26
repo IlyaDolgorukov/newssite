@@ -5,7 +5,7 @@
     <hr />
     <button type="button" class="btn btn-primary float-right"
             data-toggle="modal" data-target="#add-comment" data-parent="0" data-depth="0">Комментировать</button>
-    Комментарии: <span id="no-comments"<?php if(empty(!$comments)) echo ' class="d-none"';  ?>>Нет комментариев</span>
+    Комментарии: <span id="no-comments"<?php if(empty(!$comments)) echo ' class="d-none"'; ?>>Нет комментариев</span>
     <div id="news-comment-block">
     <?php if(!empty($comments)): ?>
         <?php foreach ($comments as $c): ?>
@@ -46,7 +46,7 @@
                 <form>
                     <div class="form-group">
                         <label for="author-field">Автор</label>
-                        <input type="text" class="form-control" id="author-field" name="author" value="" />
+                        <input type="text" class="form-control" id="author-field" name="author" value="<?php if(empty(!$author)) echo $author; ?>" />
                     </div>
                     <div class="form-group">
                         <label for="comment-field">Комментарий</label>

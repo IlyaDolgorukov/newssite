@@ -1,8 +1,9 @@
+<?php $news_author = (!empty($values['author'])) ? $values['author'] : (!empty($author)) ? $author : ''; ?>
 <form method="post" action="">
     <div class="form-group">
         <label for="author-field">Автор</label>
         <input type="text" class="form-control<?php if(in_array('author', $errors)) echo ' is-invalid'; ?>"
-               id="author-field" name="form_data[author]" value="<?php if(!empty($values['author'])) echo $values['author']; ?>" />
+               id="author-field" name="form_data[author]" value="<?= $news_author; ?>" />
     </div>
     <div class="form-group">
         <label for="title-field">Заголовок</label>

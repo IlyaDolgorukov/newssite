@@ -188,6 +188,25 @@ final class Application
     }
 
     /**
+     * @param $key
+     * @param null $default
+     * @return null
+     */
+    public function getSessionVar($key, $default = null)
+    {
+        return (isset($_SESSION[$key])) ? $_SESSION[$key] : $default;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function setSessionVar($key, $value)
+    {
+        $_SESSION[$key] = $value;
+    }
+
+    /**
      * @return resource
      */
     private function db_connect()

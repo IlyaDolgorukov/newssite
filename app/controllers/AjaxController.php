@@ -79,6 +79,7 @@ class AjaxController extends Controller
                 $model = new CommentsModel();
                 $id = $model->addComment($insert_data);
                 if ($id > 0) {
+                    sc()->setSessionVar('author', $insert_data['author']);
                     $comment = $insert_data;
                     $comment['date'] = date("d.m.Y H:i");
                     $comment['id'] = $id;
@@ -90,7 +91,7 @@ class AjaxController extends Controller
                 $this->errors = $result['errors'];
             }
         } else {
-            $this->errors = array('Входные параметры не корректны', 'И тут еще чего-то');
+            $this->errors = array('Входные параметры не корректны');
         }
     }
 }
