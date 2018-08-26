@@ -9,17 +9,50 @@
 
 namespace core;
 
+/**
+ * Class View
+ * @package core
+ */
 class View
 {
+    /**
+     * @var string
+     */
     protected $postfix = '.php';
+    /**
+     * @var string
+     */
     protected $layout_path;
+    /**
+     * @var string
+     */
     protected $view_path;
+    /**
+     * @var null
+     */
     protected $layout = null;
+    /**
+     * @var null
+     */
     protected $view = null;
+    /**
+     * @var string
+     */
     protected $title = '';
+    /**
+     * @var array
+     */
     protected $meta = array();
+    /**
+     * @var array
+     */
     protected $template_data = array();
 
+    /**
+     * View constructor.
+     * @param string $layout
+     * @param string $view
+     */
     public function __construct($layout = '', $view = '')
     {
         $controller = Request::param('controller', '', 'string');
@@ -38,6 +71,9 @@ class View
         }
     }
 
+    /**
+     * @param null $layout
+     */
     public function setLayout($layout = null)
     {
         if (!empty($layout)) {
@@ -53,6 +89,9 @@ class View
         }
     }
 
+    /**
+     * @param null $view
+     */
     public function setView($view = null)
     {
         if (!empty($view)) {
@@ -68,6 +107,9 @@ class View
         }
     }
 
+    /**
+     * @param $title
+     */
     public function setTitle($title)
     {
         if (is_string($title)) {
@@ -75,6 +117,10 @@ class View
         }
     }
 
+    /**
+     * @param $name
+     * @param $content
+     */
     public function setMeta($name, $content)
     {
         if (is_string($name)) {
@@ -82,6 +128,10 @@ class View
         }
     }
 
+    /**
+     * @param $name
+     * @param $value
+     */
     public function assign($name, $value)
     {
         if (is_string($name)) {
@@ -89,6 +139,9 @@ class View
         }
     }
 
+    /**
+     *
+     */
     public function display()
     {
         if ($this->view !== null) {

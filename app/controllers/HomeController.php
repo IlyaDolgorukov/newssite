@@ -13,10 +13,20 @@ use app\models\NewsModel;
 use core\Controller;
 use core\Request;
 
+/**
+ * Class HomeController
+ * @package app\controllers
+ */
 class HomeController extends Controller
 {
+    /**
+     * @var int
+     */
     protected $limit = 5;
 
+    /**
+     *
+     */
     public function indexAction()
     {
         $model = new NewsModel();

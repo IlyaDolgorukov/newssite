@@ -11,11 +11,25 @@ namespace app\models;
 
 use core\Model;
 
+/**
+ * Class CommentsModel
+ * @package app\models
+ */
 class CommentsModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'comments';
+    /**
+     * @var
+     */
     protected $comments;
 
+    /**
+     * @param $data
+     * @return int
+     */
     public function addComment($data)
     {
         $columns = array('news_id', 'parent', 'depth', 'author', 'text');
@@ -32,6 +46,10 @@ class CommentsModel extends Model
         return $this->query($sql)->insertId();
     }
 
+    /**
+     * @param $news_id
+     * @return array
+     */
     public function getNewsComments($news_id)
     {
         $sql = "
@@ -40,35 +58,40 @@ class CommentsModel extends Model
             ORDER BY date DESC
         ";
         $result = $this->query($sql)->fetchAll();
-        if(!empty($result)){
+        if (!empty($result)) {
             $this->comments = $result;
             $result = $this->sortComments($result);
         }
         return $result;
     }
 
-    private function sortComments($comments, $depth = 0){
+    /**
+     * @param $comments
+     * @param int $depth
+     * @return array
+     */
+    private function sortComments($comments, $depth = 0)
+    {
         $data = array();
-        foreach($comments as $c){
-            if($c['depth'] == $depth){
+        foreach ($comments as $c) {
+            if ($c['depth'] == $depth) {
                 $data[] = $c;
             }
         }
-        if(!empty($data)){
-            foreach($data as &$d){
+        if (!empty($data)) {
+            foreach ($data as &$d) {
                 $childs = array();
-                foreach($this->comments as $cc){
-                    if($cc['parent'] == $d['id']){
+                foreach ($this->comments as $cc) {
+                    if ($cc['parent'] == $d['id']) {
                         $childs[] = $cc;
                     }
                 }
-                if(!empty($childs)){
+                if (!empty($childs)) {
                     $next = $depth + 1;
                     $d['childs'] = $this->sortComments($childs, $next);
                 }
             }
         }
-
         return $data;
     }
 }

@@ -11,10 +11,22 @@ namespace app\models;
 
 use core\Model;
 
+/**
+ * Class NewsModel
+ * @package app\models
+ */
 class NewsModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'news';
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
     public function getNews($limit = 5, $offset = 0)
     {
         $sql = "
@@ -25,6 +37,9 @@ class NewsModel extends Model
         return $this->query($sql)->fetchAll('id');
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getNewsCount()
     {
         $sql = "
@@ -34,6 +49,10 @@ class NewsModel extends Model
         return $this->query($sql)->countAll();
     }
 
+    /**
+     * @param $id
+     * @return array
+     */
     public function getNewsById($id)
     {
         $sql = "
@@ -43,6 +62,10 @@ class NewsModel extends Model
         return $this->query($sql)->fetchAssoc();
     }
 
+    /**
+     * @param $data
+     * @return int
+     */
     public function addNews($data)
     {
         $columns = array('author', 'title', 'short_text', 'full_text');

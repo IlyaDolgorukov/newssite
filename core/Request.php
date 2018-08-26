@@ -124,7 +124,7 @@ class Request
                 $result[$k] = $v;
             }
         }
-        return '?'.http_build_query($result);
+        return '?' . http_build_query($result);
     }
 
     /**

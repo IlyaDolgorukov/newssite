@@ -62,11 +62,11 @@ class NewsController extends Controller
                     //save form & redirect to home page
                     $model = new NewsModel();
                     $id = $model->addNews($result['values']);
-                    if($id > 0){
+                    if ($id > 0) {
                         sc()->setSessionVar('author', $result['values']['author']);
                         header('Location: /');
                         exit;
-                    }else{
+                    } else {
                         sc()->showError("Не удалось добавить новость");
                     }
                 } else {
