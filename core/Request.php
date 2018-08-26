@@ -92,6 +92,11 @@ class Request
         return (!empty($val)) ? htmlspecialchars($val) : '';
     }
 
+    /**
+     * @param $data
+     * @param $fields
+     * @return array
+     */
     public static function validateForm($data, $fields)
     {
         $errors = $values = array();
@@ -104,6 +109,22 @@ class Request
             }
         }
         return compact('values', 'errors');
+    }
+
+    /**
+     * @param array $params
+     * @return string
+     */
+    public static function createParamsQuery($params = array())
+    {
+        $params = (array)$params;
+        $result = self::get();
+        if (!empty($params)) {
+            foreach ($params as $k => $v) {
+                $result[$k] = $v;
+            }
+        }
+        return '?'.http_build_query($result);
     }
 
     /**

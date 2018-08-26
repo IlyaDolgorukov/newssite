@@ -258,4 +258,54 @@ final class Application
         echo $msg;
         if ($exit) exit;
     }
+
+    /**
+     * @param array $params
+     * @return string
+     */
+    public function getPagination($params = array())
+    {
+        $total = isset($params['total']) ? $params['total'] : 1;
+        $page = isset($params['page']) ? $params['page'] : 1;
+        $nb = isset($params['nb']) ? $params['nb'] : 1;
+        $prev = isset($params['prev']) ? $params['prev'] : '&laquo;';
+        $next = isset($params['next']) ? $params['next'] : '&raquo;';
+        if ($total < 2) {
+            return '';
+        }
+        $html = '<ul';
+        $attrs = isset($params['attrs']) ? $params['attrs'] : array();
+        foreach ($attrs as $k => $v) {
+            $html .= ' ' . $k . '="' . $v . '"';
+        }
+        $html .= '>';
+        if ($page > 1) {
+            $prev_page = $page - 1;
+            $page_url = Request::createParamsQuery(array('page' => $prev_page));
+            $html .= '<li class="page-item"><a class="page-link" href="' . $page_url . '">' . $prev . '</a></li>';
+        } else {
+            $html .= '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">' . $prev . '</a></li>';
+        }
+        $p = 1;
+        $n = 1;
+        while ($p <= $total) {
+            if ($p > $nb && ($total - $p) > $nb && abs($page - $p) > $n && ($p < $page ? ($page - $n - $p > 1) : ($total - $nb > $p))) {
+                $p = $p < $page ? $page - $n : $total - $nb + 1;
+                $html .= '<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
+            } else {
+                $page_url = Request::createParamsQuery(array('page' => $p));
+                $html .= '<li class="page-item' . ($p == $page ? ' active' : '') . '"><a class="page-link" href="' . $page_url . '">' . $p . '</a></li>';
+                $p++;
+            }
+        }
+        if ($page < $total) {
+            $next_page = $page + 1;
+            $page_url = Request::createParamsQuery(array('page' => $next_page));
+            $html .= '<li class="page-item"><a class="page-link" href="' . $page_url . '">' . $next . '</a></li>';
+        } else {
+            $html .= '<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">' . $next . '</a></li>';
+        }
+        $html .= '</ul>';
+        return $html;
+    }
 }

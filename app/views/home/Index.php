@@ -1,4 +1,6 @@
 <div class="jumbotron">
+    <a href="/news/add" class="btn btn-success btn-lg float-right" tabindex="-1" role="button">Добавить новость</a>
+    <div class="clearfix"></div>
     <?php if(!empty($news)): ?>
         <?php foreach ($news as $n): ?>
             <div class="card bg-light news-card">
@@ -13,7 +15,9 @@
     <?php else: ?>
         Еще нет новостей
     <?php endif; ?>
-</div>
-<div class="text-center">
-    <a href="/news/add" class="btn btn-success btn-lg" tabindex="-1" role="button">Добавить новость</a>
+    <?php if($news_pages > 1): ?>
+        <nav class="text-center news-pagination">
+            <?php echo sc()->getPagination(array('total' => $news_pages, 'page' => $news_page, 'nb' => 4, 'attrs' => array('class' => 'pagination justify-content-center'))); ?>
+        </nav>
+    <?php endif; ?>
 </div>

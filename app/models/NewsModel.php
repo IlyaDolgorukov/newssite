@@ -25,6 +25,15 @@ class NewsModel extends Model
         return $this->query($sql)->fetchAll('id');
     }
 
+    public function getNewsCount()
+    {
+        $sql = "
+            SELECT COUNT(*)
+            FROM {$this->getTable()}
+        ";
+        return $this->query($sql)->countAll();
+    }
+
     public function getNewsById($id)
     {
         $sql = "

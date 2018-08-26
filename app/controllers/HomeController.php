@@ -22,11 +22,15 @@ class HomeController extends Controller
         $model = new NewsModel();
         $page = Request::get('page', 1, 'int');
         $offset = ($page - 1) * $this->limit;
+        $news_count = $model->getNewsCount();
         $title = 'Главная страница';
         $this->view->setTitle($title);
         $this->view->setMeta('Keywords', $title);
         $this->view->setMeta('Description', $title);
-        $this->view->assign('name', 'testim');
         $this->view->assign('news', $model->getNews($this->limit, $offset));
+        $this->view->assign('news_count', $news_count);
+        $this->view->assign('news_page', $page);
+        $this->view->assign('news_pages', ceil($news_count / $this->limit));
+        $this->view->assign('news_limit', $this->limit);
     }
 }
