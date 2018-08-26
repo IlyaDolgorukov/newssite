@@ -11,13 +11,13 @@
             <?php endforeach; ?>
         <?php endif; ?>
         <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
-        <link href="/public/bootstrap/css/bootstrap.css" rel="stylesheet">
-        <link href="/public/css/main.css" rel="stylesheet">
+        <link href="/public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/public/css/main.min.css" rel="stylesheet">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="/public/bootstrap/js/bootstrap.js"></script>
-        <script src="/public/js/main.js"></script>
+        <script src="/public/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/public/js/main.min.js"></script>
         <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
